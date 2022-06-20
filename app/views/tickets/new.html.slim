@@ -1,0 +1,9 @@
+.container style="background:lightgreen; padding:10px; border-radius:20px"
+  h1 New ticket
+
+  == render "form", ticket: @ticket
+
+  br
+
+  div
+    = link_to "Back to tickets", tickets_path

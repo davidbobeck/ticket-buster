@@ -1,0 +1,22 @@
+= form_with(model: ticket, url: spa_create_ticket_path, method: :post, id: "new-ticket-form") do |form|
+  - if ticket.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(ticket.errors.count, "error")} prohibited this ticket from being saved:"
+      ul
+        - ticket.errors.each do |error|
+          li = error.full_message
+
+  div
+    = form.label :title, style: "display: block"
+    = form.text_field :title
+
+  div
+    = form.label :problem, style: "display: block"
+    = form.text_area :problem
+
+  / div
+  /   = form.label :fixed, style: "display: block"
+  /   = form.check_box :fixed
+
+  div
+    = form.submit "Create a Ticket", class: "btn btn-success"

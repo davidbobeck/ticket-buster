@@ -1,0 +1,15 @@
+= turbo_stream_from "ticket-listeners"
+
+p style="color: green"
+  span#notice = notice
+
+.container style="background:lightblue; padding:10px; border-radius:20px"
+  h1 SPA Ticket Management
+
+  == render "spa_new_form", ticket: @ticket
+  br
+
+  #tickets-go-here
+    - @tickets.each do |ticket|
+      / == render ticket
+      == render 'spa_ticket', ticket: ticket

@@ -1,0 +1,19 @@
+div id="ticket-#{ticket.id}"
+  .container style="background:orange;margin:5px 0"
+
+    div style="float:right"
+      div style="display:inline-block;"
+        = button_to "Edit", spa_edit_ticket_path(ticket), method: :post, class: "btn btn-sm btn-primary mx-2 my-2"
+      div style="display:inline-block;"
+        = button_to "Destroy", spa_destroy_ticket_path(ticket), method: :delete, class: "btn btn-sm btn-danger mx-2 my-2"
+
+    span style="margin:5px;color:darkblue;font-weight:bold"
+      = ticket.title
+    span
+      =< ticket.problem
+    p style="margin:5px;floatx:right"
+      strong Fixed:
+      =< ticket.fixed ? 'Yes' : 'No'
+    p style="margin:5px"
+      strong ID:
+      =< ticket.id

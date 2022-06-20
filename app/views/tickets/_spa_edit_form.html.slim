@@ -1,0 +1,23 @@
+= form_with(model: ticket, url: spa_update_ticket_path(ticket), id: "edit-ticket-form", html: {style: "padding:5px;background:darkorange"}) do |form|
+  - if ticket.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(ticket.errors.count, "error")} prohibited this ticket from being saved:"
+      ul
+        - ticket.errors.each do |error|
+          li = error.full_message
+
+  div style="float:right"
+    div style="display:inline-block;"
+      = form.submit "Update", class: "btn btn-sm btn-success"
+    div style="display:inline-block;"
+      = button_to "Cancel", spa_cancel_ticket_path(ticket), method: :post, class: "btn btn-sm btn-primary mx-2 my-2"
+
+  div style="display: inline-block"
+    = form.text_field :title, class: "form-control", placeholder: "title", style: "width: 300px"
+
+  div style="display: inline-block"
+    = form.text_field :problem, class: "form-control", placeholder: "problem", style: "width: 700px"
+
+  / div
+  /   = form.label :fixed, style: "display: block"
+  /   = form.check_box :fixed
