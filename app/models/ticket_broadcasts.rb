@@ -7,7 +7,6 @@ module TicketBroadcasts
 
   def broadcast_update_to_listeners
     self.broadcast_replace_to "ticket-listeners", target: "ticket-#{self.id}", partial: "tickets/spa_ticket", locals: {ticket: self}
-    self.broadcast_replace_to "ticket-listeners", target: "edit-ticket-form", partial: "tickets/spa_ticket", locals: {ticket: self}
     self.broadcast_replace_to "ticket-listeners", target: "ticket-notice", partial: "layouts/ticket_notice", locals: {notice: "Updated: #{self.title}"}
   end
 
@@ -21,6 +20,6 @@ module TicketBroadcasts
   end
 
   def broadcast_edit_cancel_to_listeners
-    self.broadcast_replace_to "ticket-listeners", target: "edit-ticket-form", partial: "tickets/spa_ticket", locals: {ticket: self}
+    self.broadcast_replace_to "ticket-listeners", target: "ticket-#{self.id}", partial: "tickets/spa_ticket", locals: {ticket: self}
   end
 end

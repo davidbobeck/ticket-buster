@@ -1,23 +1,27 @@
-= form_with(model: ticket, url: spa_update_ticket_path(ticket), id: "edit-ticket-form", html: {style: "padding:5px;background:darkorange"}) do |form|
-  - if ticket.errors.any?
-    div style="color: red"
-      h2 = "#{pluralize(ticket.errors.count, "error")} prohibited this ticket from being saved:"
-      ul
-        - ticket.errors.each do |error|
-          li = error.full_message
+section.bg-light.my-1.p-1.rounded-2 id="ticket-#{ticket.id}"
+  = form_with(model: ticket, url: spa_update_ticket_path(ticket)) do |form|
+    - if ticket.errors.any?
+      div style="color: red"
+        h2 = "#{pluralize(ticket.errors.count, "error")} prohibited this ticket from being saved:"
+        ul
+          - ticket.errors.each do |error|
+            li = error.full_message
 
-  div style="float:right"
-    div style="display:inline-block;"
-      = form.submit "Update", class: "btn btn-sm btn-success"
-    div style="display:inline-block;"
-      = button_to "Cancel", spa_cancel_ticket_path(ticket), method: :post, class: "btn btn-sm btn-primary mx-2 my-2"
+    span.d-inline-flex.p-1.w-100.justify-content-between.align-items-center
+      span.me-2 style="width:75px" => "Title:"
+      = form.text_field :title, class: "form-control", placeholder: "title"
 
-  div style="display: inline-block"
-    = form.text_field :title, class: "form-control", placeholder: "title", style: "width: 300px"
+    span.d-inline-flex.p-1.w-100.align-items-top
+      span.me-2 style="width:75px" => "Problem:"
+      = form.text_area :problem, sizex: '50x10', class: "form-control", placeholder: "problem", style: "height:200px"
 
-  div style="display: inline-block"
-    = form.text_field :problem, class: "form-control", placeholder: "problem", style: "width: 700px"
-
-  / div
-  /   = form.label :fixed, style: "display: block"
-  /   = form.check_box :fixed
+    span.d-inline-flex.w-100.justify-content-center
+      div.text-center.borderx.border-danger style="width:300px"
+        span.d-inline-block.m-1
+          = form.button nil, class: "btn btn-sm btn-success my-1" do
+            i.bi.bi-check-lg
+            span =< "Update"
+        span.d-inline-block.m-1
+          = button_to spa_cancel_ticket_path(ticket), method: :post, class: "btn btn-sm btn-primary my-1 d-inline-block" do
+            i.bi.bi-x-lg
+            span =< "Cancel"

@@ -1,22 +1,47 @@
-= form_with(model: ticket, url: spa_create_ticket_path, method: :post, id: "new-ticket-form") do |form|
-  - if ticket.errors.any?
-    div style="color: red"
-      h2 = "#{pluralize(ticket.errors.count, "error")} prohibited this ticket from being saved:"
-      ul
-        - ticket.errors.each do |error|
-          li = error.full_message
+/ = form_with(model: ticket, url: spa_create_ticket_path, method: :post, id: "new-ticket-form") do |form|
+/   - if ticket.errors.any?
+/     div style="color: red"
+/       h2 = "#{pluralize(ticket.errors.count, "error")} prohibited this ticket from being saved:"
+/       ul
+/         - ticket.errors.each do |error|
+/           li = error.full_message
 
-  div
-    = form.label :title, style: "display: block"
-    = form.text_field :title
+/   div
+/     = form.label :title, style: "display: block"
+/     = form.text_field :title
 
-  div
-    = form.label :problem, style: "display: block"
-    = form.text_area :problem
+/   div
+/     = form.label :problem, style: "display: block"
+/     = form.text_area :problem
 
-  / div
-  /   = form.label :fixed, style: "display: block"
-  /   = form.check_box :fixed
+/   / div
+/   /   = form.label :fixed, style: "display: block"
+/   /   = form.check_box :fixed
 
-  div
-    = form.submit "Create a Ticket", class: "btn btn-success"
+/   div
+/     = form.submit "Create a Ticket", class: "btn btn-success"
+
+
+section#new-ticket-form.my-1.p-1.rounded-2.bg-light stylex="background-color: lightgreen"
+  = form_with(model: ticket, url: spa_create_ticket_path, method: :post) do |form|
+    - if ticket.errors.any?
+      div style="color: red"
+        h2 = "#{pluralize(ticket.errors.count, "error")} prohibited this ticket from being saved:"
+        ul
+          - ticket.errors.each do |error|
+            li = error.full_message
+
+    span.d-inline-flex.p-1.w-100.justify-content-between.align-items-center
+      span.me-2 style="width:75px" => "Title:"
+      = form.text_field :title, class: "form-control"
+
+    span.d-inline-flex.p-1.w-100.align-items-top
+      span.me-2 style="width:75px" => "Problem:"
+      = form.text_area :problem, sizex: '50x10', class: "form-control", style: "height:200px"
+
+    span.d-inline-flex.w-100.justify-content-center
+      div.text-center.borderx.border-danger style="width:300px"
+        span.d-inline-block.m-1
+          = form.button nil, class: "btn btn-sm btn-success my-1" do
+            i.bi.bi-check-lg
+            span =< "Create a Ticket"

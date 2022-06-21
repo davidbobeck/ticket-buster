@@ -4,12 +4,12 @@ p style="color: green"
   span#notice = notice
 
 .container style="background:lightblue; padding:10px; border-radius:20px"
-  h1 SPA Ticket Management
+  h1.text-sm-start.text-md-center.text-lg-end SPA Ticket Management
 
   == render "spa_new_form", ticket: @ticket
   br
 
-  #tickets-go-here
+  #tickets-go-here.list-group
     - @tickets.each do |ticket|
       / == render ticket
       == render 'spa_ticket', ticket: ticket

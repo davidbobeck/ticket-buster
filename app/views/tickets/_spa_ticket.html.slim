@@ -1,19 +1,18 @@
-div id="ticket-#{ticket.id}"
-  .container style="background:orange;margin:5px 0"
+label.list-group-item id="ticket-#{ticket.id}"
+  / see list groups https://getbootstrap.com/docs/5.0/components/list-group/
 
-    div style="float:right"
-      div style="display:inline-block;"
-        = button_to "Edit", spa_edit_ticket_path(ticket), method: :post, class: "btn btn-sm btn-primary mx-2 my-2"
-      div style="display:inline-block;"
-        = button_to "Destroy", spa_destroy_ticket_path(ticket), method: :delete, class: "btn btn-sm btn-danger mx-2 my-2"
+  div.d-flex.w-100.justify-content-between.align-items-center
+    div
+      input.form-check-input.me-1 type="checkbox" value=true aria-label="..."
+      span.h5.text-primary =< ticket.title
+      p.mb-1.ms-4 = ticket.problem
+      small.ms-4.text-muted = "ID #{ticket.id}, Fixed: #{ticket.fixed ? 'Yes' : 'No'}"
 
-    span style="margin:5px;color:darkblue;font-weight:bold"
-      = ticket.title
-    span
-      =< ticket.problem
-    p style="margin:5px;floatx:right"
-      strong Fixed:
-      =< ticket.fixed ? 'Yes' : 'No'
-    p style="margin:5px"
-      strong ID:
-      =< ticket.id
+    div.for-flex-box
+      div.text-end.borderx.borderx-danger style="width:70px"
+        = button_to spa_edit_ticket_path(ticket), method: :post, class: "btn btn-sm btn-primary mx-1 my-1" do
+          i.bi.bi-pencil
+          / span =< "Edit"
+        = button_to spa_destroy_ticket_path(ticket), method: :delete, class: "btn btn-sm btn-danger mx-1 my-1" do
+          i.bi.bi-trash
+          / span =< "Destroy"
