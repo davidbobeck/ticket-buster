@@ -1,4 +1,13 @@
 .container
   h1 Ticketing Home Page
   p Find me in app/views/pages/home.html.slim
+
+  = turbo_frame_tag "first_turbo_frame",  src: "pages/async_turbo_frame" do
+    / span.spinner-border.text-primary.me-2 role="status"
+      span.visually-hidden
+        = "Loading..."
+    span.spinner-border.text-primary.me-2
+    h2.d-inline-block This is the original turbo_frame dom
+    br
+
   = link_to "To About", pages_about_path, class: "btn btn-primary"
